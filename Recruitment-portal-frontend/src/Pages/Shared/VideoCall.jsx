@@ -7,6 +7,20 @@ function VideoCall() {
   const localVideoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer(t => t + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
 
   useEffect(() => {
     const startVideo = async () => {
@@ -61,6 +75,12 @@ function VideoCall() {
     <div className="d-flex flex-column align-items-center justify-content-center vh-100 bg-dark text-white">
       <div className="position-absolute top-0 start-0 p-3">
         <h4>Session: {sessionId}</h4>
+      </div>
+      <div className="position-absolute top-0 end-0 p-3">
+        <div className="badge bg-danger fs-5">
+          <i className="bi bi-record-circle me-2"></i>
+          {formatTime(timer)}
+        </div>
       </div>
 
       <div className="row w-100 h-75 px-4">

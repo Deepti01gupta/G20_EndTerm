@@ -37,6 +37,18 @@ function InterviewerSessions() {
       allSessions[idx].feedback = feedback;
       allSessions[idx].status = "completed";
       localStorage.setItem("sessions", JSON.stringify(allSessions));
+
+      // Notify Interviewee
+      const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+      notifications.push({
+        id: Date.now(),
+        userId: allSessions[idx].intervieweeEmail,
+        message: `You received feedback from ${allSessions[idx].interviewerName} for your session on ${allSessions[idx].scheduledDate}.`,
+        type: "feedback",
+        read: false,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem("notifications", JSON.stringify(notifications));
     }
     
     setShowFeedbackModal(false);

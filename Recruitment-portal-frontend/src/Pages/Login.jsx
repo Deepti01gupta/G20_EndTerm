@@ -12,6 +12,13 @@ function Login() {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const user = users.find((u) => u.email === email && u.password === password);
 
+    if (email === "admin@example.com" && password === "admin123") {
+      const adminUser = { name: "Admin", email: "admin@example.com", role: "admin" };
+      localStorage.setItem("loggedInUser", JSON.stringify(adminUser));
+      navigate("/admin/dashboard");
+      return;
+    }
+
     if (user) {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
       if (user.role === "interviewer") {

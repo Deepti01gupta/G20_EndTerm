@@ -25,6 +25,10 @@ import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
 import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
 import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
 
+// Admin Pages
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AdminLayout from "./Layouts/AdminLayout";
+
 // Shared
 import VideoCall from "./Pages/Shared/VideoCall";
 
@@ -48,6 +52,11 @@ function App() {
 
         {/* Video Call Route (Protected for both) */}
         <Route path="/video-call/:sessionId" element={<VideoCall />} />
+
+        {/* Admin Pages */}
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Route>
 
         {/* Interviewee Pages (Protected) */}
         <Route

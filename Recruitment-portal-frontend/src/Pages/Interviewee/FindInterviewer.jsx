@@ -27,6 +27,28 @@ function FindInterviewer() {
     }
   };
 
+  const handleAutoMatch = () => {
+    const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (!loggedIn.skills) {
+      alert("Please update your profile with skills first to use Auto Match.");
+      return;
+    }
+
+    const userSkills = loggedIn.skills.toLowerCase().split(",").map(s => s.trim());
+    const matched = interviewers.filter(i => 
+      i.skills && userSkills.some(skill => i.skills.toLowerCase().includes(skill))
+    );
+
+    if (matched.length > 0) {
+      // Pick a random one from matches
+      const randomMatch = matched[Math.floor(Math.random() * matched.length)];
+      alert(`We found a match for you! ${randomMatch.name} matches your skills.`);
+      openScheduleModal(randomMatch);
+    } else {
+      alert("No matching interviewers found for your skills. Try manual search.");
+    }
+  };
+
   const openScheduleModal = (interviewer) => {
     setSelectedInterviewer(interviewer);
     setShowModal(true);
@@ -63,6 +85,18 @@ function FindInterviewer() {
     sessions.push(newSession);
     localStorage.setItem("sessions", JSON.stringify(sessions));
 
+    // Create Notification for Interviewer
+    const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+    notifications.push({
+      id: Date.now(),
+      userId: selectedInterviewer.email,
+      message: `New interview request from ${loggedIn.name} for ${scheduleDate} at ${scheduleTime}`,
+      type: "request",
+      read: false,
+      date: new Date().toISOString()
+    });
+    localStorage.setItem("notifications", JSON.stringify(notifications));
+
     alert("Interview scheduled successfully!");
     setShowModal(false);
     setScheduleDate("");
@@ -82,6 +116,11 @@ function FindInterviewer() {
             value={skillFilter}
             onChange={(e) => handleFilter(e.target.value)}
           />
+        </div>
+        <div className="col-md-6 text-end">
+          <button className="btn btn-success" onClick={handleAutoMatch}>
+            <i className="bi bi-magic me-2"></i> Auto Match Me
+          </button>
         </div>
       </div>
 

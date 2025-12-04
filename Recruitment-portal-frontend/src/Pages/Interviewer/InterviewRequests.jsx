@@ -28,6 +28,19 @@ function InterviewRequests() {
       } else if (action === "cancel") {
         allSessions[idx].status = "cancelled";
         localStorage.setItem("sessions", JSON.stringify(allSessions));
+
+        // Notify Interviewee
+        const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+        notifications.push({
+          id: Date.now(),
+          userId: allSessions[idx].intervieweeEmail,
+          message: `Your interview with ${allSessions[idx].interviewerName} on ${allSessions[idx].scheduledDate} was cancelled.`,
+          type: "cancel",
+          read: false,
+          date: new Date().toISOString()
+        });
+        localStorage.setItem("notifications", JSON.stringify(notifications));
+
         loadSessions();
       }
     }
