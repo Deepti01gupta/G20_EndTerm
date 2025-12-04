@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Notifications from "./Notifications";
 
 function InterviewerNavbar() {
   const navigate = useNavigate();
@@ -41,7 +42,8 @@ function InterviewerNavbar() {
             <li className="nav-item"><Link className="nav-link" to="/interviewer/profile">Profile</Link></li>
 
             {user && (
-              <li className="nav-item ms-2">
+              <li className="nav-item ms-2 d-flex align-items-center">
+                <Notifications />
                 <div className="d-flex align-items-center">
                   <span className="me-2 text-white small">{user.name}</span>
                   <button className="btn btn-outline-light btn-sm" onClick={handleLogout}>Logout</button>

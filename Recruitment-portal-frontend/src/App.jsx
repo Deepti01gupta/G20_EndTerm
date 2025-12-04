@@ -18,6 +18,7 @@ import IntervieweeDashboard from "./Pages/Interviewee/IntervieweeDashboard";
 import FindInterviewer from "./Pages/Interviewee/FindInterviewer";
 import IntervieweeSessions from "./Pages/Interviewee/IntervieweeSessions";
 import IntervieweeProfile from "./Pages/Interviewee/IntervieweeProfile";
+import Jobs from "./Pages/Interviewee/Jobs";
 
 // Interviewer Pages
 import InterviewerDashboard from "./Pages/Interviewer/InterviewerDashboard";
@@ -25,6 +26,13 @@ import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
 import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
 import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
 import InterviewerSchedule from "./Pages/Interviewer/Schedule";
+
+// Admin Pages
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AdminLayout from "./Layouts/AdminLayout";
+
+// Shared
+import VideoCall from "./Pages/Shared/VideoCall";
 
 // Protected Route
 import ProtectedRoute from "./ProtectedRoute";
@@ -46,6 +54,14 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
         </Route>
 
+        {/* Video Call Route (Protected for both) */}
+        <Route path="/video-call/:sessionId" element={<VideoCall />} />
+
+        {/* Admin Pages */}
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        </Route>
+
         {/* Interviewee Pages (Protected) */}
         <Route
           element={
@@ -57,6 +73,7 @@ function App() {
           <Route path="/interviewee/dashboard" element={<IntervieweeDashboard />} />
           <Route path="/interviewee/find-interviewer" element={<FindInterviewer />} />
           <Route path="/interviewee/my-sessions" element={<IntervieweeSessions />} />
+          <Route path="/interviewee/jobs" element={<Jobs />} />
           <Route path="/interviewee/profile" element={<IntervieweeProfile />} />
         </Route>
 

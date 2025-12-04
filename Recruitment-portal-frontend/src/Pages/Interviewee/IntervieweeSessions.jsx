@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
-import { getMySessions } from "../../api/scheduleAPI";
-import { submitFeedback } from "../../api/feedbackAPI";
-import Button from "../../Components/Button"; // adjust if path differs
-import Card from "../../Components/Card";     // adjust if path differs
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function IntervieweeSessions() {
   const [sessions, setSessions] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const [feedbackData, setFeedbackData] = useState({});  
-  // Example: { "sessionId123": { rating: 5, comment: "Good" } }
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function load() {
@@ -26,42 +19,75 @@ export default function IntervieweeSessions() {
     load();
   }, []);
 
-  const updateFeedback = (sessionId, field, value) => {
-    setFeedbackData(prev => ({
-      ...prev,
-      [sessionId]: { ...prev[sessionId], [field]: value }
-    }));
+  const joinCall = (sessionId) => {
+    navigate(`/video-call/${sessionId}`);
   };
-
-  const sendFeedback = async (sessionId) => {
-    const entry = feedbackData[sessionId];
-    if (!entry?.rating || !entry?.comment) {
-      alert("Please provide both rating and feedback.");
-      return;
-    }
-
-    try {
-      await submitFeedback(sessionId, {
-        rating: entry.rating,
-        feedback: entry.comment
-      });
-      alert("Feedback submitted!");
-    } catch (err) {
-      console.error(err);
-      alert("Error submitting feedback");
-    }
-  };
-
-  if (loading) return <p className="text-center mt-4">Loading sessions...</p>;
 
   return (
     <div className="max-w-4xl mx-auto mt-6">
       <h1 className="text-2xl font-bold mb-4">My Interview Sessions</h1>
 
-      {sessions.length === 0 && (
-        <p className="bg-blue-100 text-blue-800 p-4 rounded-md">
-          No sessions yet. <Link to="/find-interviewer" className="underline">Find an interviewer</Link> to book your first session!
-        </p>
+      {sessions.length === 0 ? (
+        <div className="alert alert-info">
+          No sessions yet. <Link to="/interviewee/find-interviewer">Find an interviewer</Link> to book your first session!
+        </div>
+      ) : (
+        <div className="table-responsive">
+          <table className="table table-hover">
+            <thead className="table-dark">
+              <tr>
+                <th>Interviewer</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sessions.map((session, idx) => (
+                <tr key={idx}>
+                  <td>{session.interviewerName}</td>
+                  <td>{session.scheduledDate}</td>
+                  <td>{session.scheduledTime}</td>
+                  <td>
+                    <span className={`badge bg-${session.status === 'completed' ? 'success' : session.status === 'cancelled' ? 'danger' : 'warning'}`}>
+                      {session.status}
+                    </span>
+                  </td>
+                  <td>
+                    {session.status === 'scheduled' && (
+                       <button className="btn btn-sm btn-success" onClick={() => joinCall(session.id)}>
+                         <i className="bi bi-camera-video me-1"></i> Join Call
+                       </button>
+                    )}
+                  </td>
+                  <td>
+                    {session.feedback ? (
+                      <div style={{ fontSize: "0.85rem" }}>
+                        <div className="mb-1">
+                          <strong>Overall: {session.feedback.rating}/5</strong>
+                          <span className={`badge ms-2 bg-${session.feedback.recommendation?.includes('Hire') ? 'success' : 'secondary'}`}>
+                            {session.feedback.recommendation}
+                          </span>
+                        </div>
+                        <div className="d-flex gap-2 mb-1 text-muted">
+                          <span>Tech: {session.feedback.technicalScore}</span>
+                          <span>Comm: {session.feedback.communicationScore}</span>
+                          <span>Prob: {session.feedback.problemSolvingScore}</span>
+                        </div>
+                        {session.feedback.strengths && <div className="text-success">✓ {session.feedback.strengths}</div>}
+                        {session.feedback.improvements && <div className="text-warning">↑ {session.feedback.improvements}</div>}
+                      </div>
+                    ) : (
+                      <span className="text-muted">Pending</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       <div className="space-y-5">

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function InterviewRequests() {
   const [sessions, setSessions] = useState([]);
+  const navigate = useNavigate();
 
   const loadSessions = () => {
     const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -22,10 +24,23 @@ function InterviewRequests() {
     
     if (idx !== -1) {
       if (action === "start") {
-        alert("Starting video call... (Video call feature would open here)");
+        navigate(`/video-call/${sessionId}`);
       } else if (action === "cancel") {
         allSessions[idx].status = "cancelled";
         localStorage.setItem("sessions", JSON.stringify(allSessions));
+
+        // Notify Interviewee
+        const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+        notifications.push({
+          id: Date.now(),
+          userId: allSessions[idx].intervieweeEmail,
+          message: `Your interview with ${allSessions[idx].interviewerName} on ${allSessions[idx].scheduledDate} was cancelled.`,
+          type: "cancel",
+          read: false,
+          date: new Date().toISOString()
+        });
+        localStorage.setItem("notifications", JSON.stringify(notifications));
+
         loadSessions();
       }
     }
