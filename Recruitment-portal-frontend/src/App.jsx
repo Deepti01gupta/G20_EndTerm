@@ -25,6 +25,7 @@ import InterviewerDashboard from "./Pages/Interviewer/InterviewerDashboard";
 import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
 import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
 import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
+import InterviewerSchedule from "./Pages/Interviewer/Schedule";
 
 // Admin Pages
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
@@ -41,14 +42,16 @@ function App() {
     <Router>
       <Routes>
 
+        {/* Auth Routes - No Navbar */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
         {/* Landing Pages */}
         <Route element={<LandingLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
         </Route>
 
         {/* Video Call Route (Protected for both) */}
@@ -83,6 +86,7 @@ function App() {
           }
         >
           <Route path="/interviewer/dashboard" element={<InterviewerDashboard />} />
+          <Route path="/interviewer/schedule" element={<InterviewerSchedule />} />
           <Route path="/interviewer/requests" element={<InterviewRequests />} />
           <Route path="/interviewer/my-sessions" element={<InterviewerSessions />} />
           <Route path="/interviewer/profile" element={<InterviewerProfile />} />

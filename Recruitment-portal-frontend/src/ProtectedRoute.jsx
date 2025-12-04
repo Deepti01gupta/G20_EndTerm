@@ -9,9 +9,18 @@ function ProtectedRoute({ children, role }) {
     return <Navigate to="/login" replace />;
   }
 
-  // If role is restricted and user’s role doesn’t match → redirect
-  if (role && loggedInUser.role !== role) {
-    return <Navigate to="/login" replace />;
+  // Support legacy role names: map older app roles to current ones
+  const roleAliases = {
+    interviewee: ["interviewee", "jobseeker"],
+    interviewer: ["interviewer", "employer"],
+  };
+
+  // If role is restricted and user's role doesn't match accepted values → redirect
+  if (role) {
+    const allowed = roleAliases[role] || [role];
+    if (!allowed.includes(loggedInUser.role)) {
+      return <Navigate to="/login" replace />;
+    }
   }
 
   // Otherwise → render the page
