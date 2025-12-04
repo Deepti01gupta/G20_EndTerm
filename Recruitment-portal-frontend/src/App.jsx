@@ -24,6 +24,7 @@ import InterviewerDashboard from "./Pages/Interviewer/InterviewerDashboard";
 import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
 import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
 import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
+import InterviewerSchedule from "./Pages/Interviewer/Schedule";
 
 // Protected Route
 import ProtectedRoute from "./ProtectedRoute";
@@ -68,6 +69,7 @@ function App() {
           }
         >
           <Route path="/interviewer/dashboard" element={<InterviewerDashboard />} />
+          <Route path="/interviewer/schedule" element={<InterviewerSchedule />} />
           <Route path="/interviewer/requests" element={<InterviewRequests />} />
           <Route path="/interviewer/my-sessions" element={<InterviewerSessions />} />
           <Route path="/interviewer/profile" element={<InterviewerProfile />} />

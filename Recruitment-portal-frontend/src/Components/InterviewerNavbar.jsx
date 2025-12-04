@@ -35,6 +35,7 @@ function InterviewerNavbar() {
         <div className="collapse navbar-collapse" id="interviewerNav">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
             <li className="nav-item"><Link className="nav-link" to="/interviewer/dashboard">Dashboard</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/interviewer/schedule">Schedule</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewer/requests">Interview Requests</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewer/my-sessions">My Sessions</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewer/profile">Profile</Link></li>
