@@ -25,6 +25,9 @@ import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
 import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
 import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
 
+// Shared
+import VideoCall from "./Pages/Shared/VideoCall";
+
 // Protected Route
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -42,6 +45,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
+
+        {/* Video Call Route (Protected for both) */}
+        <Route path="/video-call/:sessionId" element={<VideoCall />} />
 
         {/* Interviewee Pages (Protected) */}
         <Route

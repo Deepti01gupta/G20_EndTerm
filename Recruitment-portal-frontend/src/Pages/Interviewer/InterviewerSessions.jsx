@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function InterviewerSessions() {
   const [sessions, setSessions] = useState([]);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [currentSession, setCurrentSession] = useState(null);
   const [feedback, setFeedback] = useState({ rating: 3, strengths: "", improvements: "" });
+  const navigate = useNavigate();
 
   const loadSessions = () => {
     const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -16,6 +18,10 @@ function InterviewerSessions() {
   useEffect(() => {
     loadSessions();
   }, []);
+
+  const joinCall = (sessionId) => {
+    navigate(`/video-call/${sessionId}`);
+  };
 
   const openFeedback = (session) => {
     setCurrentSession(session);
@@ -69,9 +75,14 @@ function InterviewerSessions() {
                   </td>
                   <td>
                     {session.status === "scheduled" && (
-                      <button className="btn btn-sm btn-primary" onClick={() => openFeedback(session)}>
-                        Complete & Feedback
-                      </button>
+                      <div className="d-flex gap-2">
+                        <button className="btn btn-sm btn-success" onClick={() => joinCall(session.id)}>
+                          <i className="bi bi-camera-video"></i> Join
+                        </button>
+                        <button className="btn btn-sm btn-primary" onClick={() => openFeedback(session)}>
+                          Complete & Feedback
+                        </button>
+                      </div>
                     )}
                     {session.status === "completed" && (
                       <button className="btn btn-sm btn-outline-secondary" onClick={() => openFeedback(session)}>

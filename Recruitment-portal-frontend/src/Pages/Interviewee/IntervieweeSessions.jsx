@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function IntervieweeSessions() {
   const [sessions, setSessions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -10,6 +11,10 @@ function IntervieweeSessions() {
     const mySessions = allSessions.filter(s => s.intervieweeEmail === loggedIn?.email);
     setSessions(mySessions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
   }, []);
+
+  const joinCall = (sessionId) => {
+    navigate(`/video-call/${sessionId}`);
+  };
 
   return (
     <div className="py-4">
@@ -28,6 +33,7 @@ function IntervieweeSessions() {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
+                <th>Action</th>
                 <th>Feedback</th>
               </tr>
             </thead>
@@ -41,6 +47,13 @@ function IntervieweeSessions() {
                     <span className={`badge bg-${session.status === 'completed' ? 'success' : session.status === 'cancelled' ? 'danger' : 'warning'}`}>
                       {session.status}
                     </span>
+                  </td>
+                  <td>
+                    {session.status === 'scheduled' && (
+                       <button className="btn btn-sm btn-success" onClick={() => joinCall(session.id)}>
+                         <i className="bi bi-camera-video me-1"></i> Join Call
+                       </button>
+                    )}
                   </td>
                   <td>
                     {session.feedback ? (

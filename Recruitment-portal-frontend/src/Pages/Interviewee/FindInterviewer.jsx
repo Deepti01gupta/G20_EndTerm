@@ -38,6 +38,12 @@ function FindInterviewer() {
       return;
     }
 
+    const selectedDateTime = new Date(`${scheduleDate}T${scheduleTime}`);
+    if (selectedDateTime < new Date()) {
+      alert("Please select a future date and time.");
+      return;
+    }
+
     const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
     const sessions = JSON.parse(localStorage.getItem("sessions")) || [];
 
