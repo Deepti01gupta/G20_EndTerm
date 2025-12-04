@@ -5,7 +5,7 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("jobseeker");
+  const [role, setRole] = useState("interviewee");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -36,7 +36,7 @@ function Register() {
     <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
       <div className="card shadow p-4" style={{ maxWidth: "400px", width: "100%" }}>
         {/* Title */}
-        <h2 className="text-center mb-4">Create an Account</h2>
+        <h2 className="text-center mb-4">Join InterviewPrep</h2>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
@@ -77,14 +77,14 @@ function Register() {
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Role</label>
+            <label className="form-label">I want to</label>
             <select
               className="form-select"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
-              <option value="jobseeker">Job Seeker</option>
-              <option value="employer">Employer</option>
+              <option value="interviewee">Practice Interviews</option>
+              <option value="interviewer">Conduct Interviews</option>
             </select>
           </div>
 
