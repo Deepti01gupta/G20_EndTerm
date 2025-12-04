@@ -26,7 +26,7 @@ function LandingNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
       <div className="container">
-        <Link className="navbar-brand fw-bold fs-4" to="/">InterviewPrep</Link>
+        <Link className="navbar-brand fw-bold fs-4" to="/">HireUp</Link>
 
         <button
           className="navbar-toggler"
@@ -58,7 +58,7 @@ function LandingNavbar() {
                 <li className="nav-item">
                   <Link
                     className="nav-link"
-                    to={user.role === "interviewer" ? "/interviewer/dashboard" : "/interviewee/dashboard"}
+                    to={user.role === "employer" ? "/employer/dashboard" : "/jobseeker/dashboard"}
                   >
                     Dashboard
                   </Link>
@@ -81,7 +81,7 @@ function LandingNavbar() {
                     </li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>
-                      <button className="dropdown-item" onClick={() => navigate(user.role === "interviewer" ? "/interviewer/profile" : "/interviewee/profile")}>
+                      <button className="dropdown-item" onClick={() => navigate(user.role === "employer" ? "/employer/profile" : "/jobseeker/profile")}>
                         Profile
                       </button>
                     </li>

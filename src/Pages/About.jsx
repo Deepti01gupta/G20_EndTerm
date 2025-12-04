@@ -2,11 +2,11 @@ function About() {
   return (
     <div className="about-page">
       {/* Hero Section */}
-      <section className="bg-primary text-white text-center py-5">
+      <section className="bg-light text-dark text-center py-5">
         <div className="container">
-          <h1 className="display-5 fw-bold">About InterviewPrep</h1>
+          <h1 className="display-5 fw-bold">About HireUp</h1>
           <p className="lead">
-            Your platform for practicing interviews with real industry experts.
+            Your trusted partner in connecting top talent with leading employers.
           </p>
         </div>
       </section>
@@ -16,7 +16,7 @@ function About() {
         <div className="row align-items-center">
           <div className="col-md-6">
             <img
-              src="https://img.freepik.com/free-vector/job-interview-conversation_74855-7566.jpg"
+              src="https://img.freepik.com/free-vector/gradient-our-mission-concept-illustrated_23-2149081668.jpg"
               alt="Our Mission"
               className="img-fluid rounded shadow"
             />
@@ -24,9 +24,9 @@ function About() {
           <div className="col-md-6">
             <h2 className="mb-3">Our Mission</h2>
             <p>
-              At InterviewPrep, we connect candidates with experienced interviewers
-              to practice mock interviews. Get real feedback, track your progress,
-              and build confidence for your next big opportunity.
+              At HireUp, our mission is to simplify the hiring process. We
+              empower job seekers to showcase their skills while giving employers
+              the right tools to find, evaluate, and hire the best candidates.
             </p>
           </div>
         </div>

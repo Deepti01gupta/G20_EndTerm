@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Layouts
 import LandingLayout from "./Layouts/LandingLayout";
-import JobseekerLayout from "./Layouts/JobseekerLayout";
-import EmployerLayout from "./Layouts/EmployerLayout";
+import IntervieweeLayout from "./Layouts/IntervieweeLayout";
+import InterviewerLayout from "./Layouts/InterviewerLayout";
 
 // Landing Pages
 import Home from "./Pages/Home";
@@ -13,20 +13,17 @@ import Register from "./Pages/Register";
 import Contact from "./Pages/Contact";
 import Privacy from "./Pages/Privacy";
 
-// Jobseeker Pages
-import JobseekerDashboard from "./Pages/Jobseeker/JobseekerDashboard";
-import Jobs from "./Pages/Jobseeker/Jobs";
-import MyApplications from "./Pages/Jobseeker/MyApplications";
-import JobseekerProfile from "./Pages/Jobseeker/JobseekerProfile";
-import JobseekerSettings from "./Pages/Jobseeker/JobseekerSettings";
+// Interviewee Pages
+import IntervieweeDashboard from "./Pages/Interviewee/IntervieweeDashboard";
+import FindInterviewer from "./Pages/Interviewee/FindInterviewer";
+import IntervieweeSessions from "./Pages/Interviewee/IntervieweeSessions";
+import IntervieweeProfile from "./Pages/Interviewee/IntervieweeProfile";
 
-// Employer Pages
-import EmployerDashboard from "./Pages/Employer/EmployerDashboard";
-import PostJob from "./Pages/Employer/PostJob";
-import ViewJobs from "./Pages/Employer/ViewJobs";
-import ManageApplications from "./Pages/Employer/ManageApllications";
-import EmployerProfile from "./Pages/Employer/EmployerProfile";
-import EmployerSettings from "./Pages/Employer/EmployerSettings";
+// Interviewer Pages
+import InterviewerDashboard from "./Pages/Interviewer/InterviewerDashboard";
+import InterviewRequests from "./Pages/Interviewer/InterviewRequests";
+import InterviewerSessions from "./Pages/Interviewer/InterviewerSessions";
+import InterviewerProfile from "./Pages/Interviewer/InterviewerProfile";
 
 // Protected Route
 import ProtectedRoute from "./ProtectedRoute";
@@ -48,35 +45,32 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
         </Route>
 
-        {/* Jobseeker Pages (Protected) */}
+        {/* Interviewee Pages (Protected) */}
         <Route
           element={
-            <ProtectedRoute role="jobseeker">
-              <JobseekerLayout />
+            <ProtectedRoute role="interviewee">
+              <IntervieweeLayout />
             </ProtectedRoute>
           }
         >
-          <Route path="/jobseeker/dashboard" element={<JobseekerDashboard />} />
-          <Route path="/jobseeker/jobs" element={<Jobs />} />
-          <Route path="/jobseeker/my-applications" element={<MyApplications />} />
-          <Route path="/jobseeker/profile" element={<JobseekerProfile />} />
-          <Route path="/jobseeker/settings" element={<JobseekerSettings />} />
+          <Route path="/interviewee/dashboard" element={<IntervieweeDashboard />} />
+          <Route path="/interviewee/find-interviewer" element={<FindInterviewer />} />
+          <Route path="/interviewee/my-sessions" element={<IntervieweeSessions />} />
+          <Route path="/interviewee/profile" element={<IntervieweeProfile />} />
         </Route>
 
-        {/* Employer Pages (Protected) */}
+        {/* Interviewer Pages (Protected) */}
         <Route
           element={
-            <ProtectedRoute role="employer">
-              <EmployerLayout />
+            <ProtectedRoute role="interviewer">
+              <InterviewerLayout />
             </ProtectedRoute>
           }
         >
-          <Route path="/employer/dashboard" element={<EmployerDashboard />} />
-          <Route path="/employer/post-job" element={<PostJob />} />
-          <Route path="/employer/view-jobs" element={<ViewJobs />} />
-          <Route path="/employer/manage-applications" element={<ManageApplications />} />
-          <Route path="/employer/profile" element={<EmployerProfile />} />
-          <Route path="/employer/settings" element={<EmployerSettings />} />
+          <Route path="/interviewer/dashboard" element={<InterviewerDashboard />} />
+          <Route path="/interviewer/requests" element={<InterviewRequests />} />
+          <Route path="/interviewer/my-sessions" element={<InterviewerSessions />} />
+          <Route path="/interviewer/profile" element={<InterviewerProfile />} />
         </Route>
 
       </Routes>
