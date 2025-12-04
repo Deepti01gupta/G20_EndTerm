@@ -7,7 +7,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("jobseeker");
+  const [role, setRole] = useState("interviewee");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -169,27 +169,27 @@ function Register() {
               <div className="form-group">
                 <label className="form-label">Account Type</label>
                 <div className="role-selector">
-                  <label className={`role-option ${role === "jobseeker" ? "active" : ""}`}>
+                  <label className={`role-option ${role === "interviewee" ? "active" : ""}`}>
                     <input
                       type="radio"
                       name="role"
-                      value="jobseeker"
-                      checked={role === "jobseeker"}
+                      value="interviewee"
+                      checked={role === "interviewee"}
                       onChange={(e) => setRole(e.target.value)}
                     />
                     <span className="role-icon">💼</span>
-                    <span className="role-text">Job Seeker</span>
+                    <span className="role-text">Interviewee</span>
                   </label>
-                  <label className={`role-option ${role === "employer" ? "active" : ""}`}>
+                  <label className={`role-option ${role === "interviewer" ? "active" : ""}`}>
                     <input
                       type="radio"
                       name="role"
-                      value="employer"
-                      checked={role === "employer"}
+                      value="interviewer"
+                      checked={role === "interviewer"}
                       onChange={(e) => setRole(e.target.value)}
                     />
                     <span className="role-icon">🏢</span>
-                    <span className="role-text">Employer</span>
+                    <span className="role-text">Interviewer</span>
                   </label>
                 </div>
               </div>

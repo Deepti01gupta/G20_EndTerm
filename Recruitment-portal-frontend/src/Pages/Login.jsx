@@ -31,10 +31,10 @@ function Login() {
         localStorage.setItem("loggedInUser", JSON.stringify(user));
         setLoading(false);
         
-        if (user.role === "employer") {
-          navigate("/employer/dashboard");
+        if (user.role === "interviewer") {
+          navigate("/interviewer/dashboard");
         } else {
-          navigate("/jobseeker/dashboard");
+          navigate("/interviewee/dashboard");
         }
       } else {
         setError("Invalid email or password. Please try again.");
