@@ -97,3 +97,18 @@ This project solves that gap by providing a **Practice Interview Platform** that
 React Frontend  →  Express API  →  MongoDB
         ↓                  ↓
   Video (Jitsi)        Socket.IO
+
+
+
+
+Team Members
+
+This project was developed by the G20 team:
+
+Name	Email	Role
+Deepti Gupta	deepti.gupta_cs23@gla.ac.in
+	Captain
+Kirti Chaudhary	(email not provided)	Member
+Yachna Raghav	(email not provided)	Member
+Aditya Varshney	(email not provided)	Member
+Sanskar Khandelwal	(email not provided)	Member
