@@ -1,0 +1,31 @@
+/* Ensure footer always at bottom */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content grows to push footer down */
+main {
+  flex: 1;
+}
+
+/* Responsive text sizes */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+/* Card styling */
+.card {
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
