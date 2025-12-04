@@ -106,7 +106,8 @@ Team Members
 This project was developed by the G20 team:
 
 Name	Email	Role
-Deepti Gupta	deepti.gupta_cs23@gla.ac.in  Captain
+Deepti Gupta	deepti.gupta_cs23@gla.ac.in
+	Captain
 Kirti Chaudhary	(email not provided)	Member
 Yachna Raghav	(email not provided)	Member
 Aditya Varshney	(email not provided)	Member
