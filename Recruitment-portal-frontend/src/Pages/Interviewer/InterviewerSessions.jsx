@@ -5,7 +5,15 @@ function InterviewerSessions() {
   const [sessions, setSessions] = useState([]);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [currentSession, setCurrentSession] = useState(null);
-  const [feedback, setFeedback] = useState({ rating: 3, strengths: "", improvements: "" });
+  const [feedback, setFeedback] = useState({ 
+    rating: 3, 
+    technicalScore: 3,
+    communicationScore: 3,
+    problemSolvingScore: 3,
+    strengths: "", 
+    improvements: "",
+    recommendation: "No Hire"
+  });
   const navigate = useNavigate();
 
   const loadSessions = () => {
@@ -25,7 +33,15 @@ function InterviewerSessions() {
 
   const openFeedback = (session) => {
     setCurrentSession(session);
-    setFeedback(session.feedback || { rating: 3, strengths: "", improvements: "" });
+    setFeedback(session.feedback || { 
+      rating: 3, 
+      technicalScore: 3,
+      communicationScore: 3,
+      problemSolvingScore: 3,
+      strengths: "", 
+      improvements: "",
+      recommendation: "No Hire"
+    });
     setShowFeedbackModal(true);
   };
 
@@ -118,18 +134,67 @@ function InterviewerSessions() {
                 <button className="btn-close" onClick={() => setShowFeedbackModal(false)}></button>
               </div>
               <div className="modal-body">
-                <div className="mb-3">
-                  <label className="form-label">Rating (1-5)</label>
-                  <input
-                    type="range"
-                    className="form-range"
-                    min="1"
-                    max="5"
-                    value={feedback.rating}
-                    onChange={(e) => setFeedback({ ...feedback, rating: parseInt(e.target.value) })}
-                  />
-                  <div className="text-center fw-bold">{feedback.rating} / 5</div>
+                <div className="row">
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label">Overall Rating (1-5)</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      max="5"
+                      value={feedback.rating}
+                      onChange={(e) => setFeedback({ ...feedback, rating: parseInt(e.target.value) })}
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label">Technical Skills (1-5)</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      max="5"
+                      value={feedback.technicalScore}
+                      onChange={(e) => setFeedback({ ...feedback, technicalScore: parseInt(e.target.value) })}
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label">Communication (1-5)</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      max="5"
+                      value={feedback.communicationScore}
+                      onChange={(e) => setFeedback({ ...feedback, communicationScore: parseInt(e.target.value) })}
+                    />
+                  </div>
+                  <div className="col-md-6 mb-3">
+                    <label className="form-label">Problem Solving (1-5)</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      min="1"
+                      max="5"
+                      value={feedback.problemSolvingScore}
+                      onChange={(e) => setFeedback({ ...feedback, problemSolvingScore: parseInt(e.target.value) })}
+                    />
+                  </div>
                 </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Recommendation</label>
+                  <select 
+                    className="form-select"
+                    value={feedback.recommendation}
+                    onChange={(e) => setFeedback({ ...feedback, recommendation: e.target.value })}
+                  >
+                    <option value="No Hire">No Hire</option>
+                    <option value="Weak Hire">Weak Hire</option>
+                    <option value="Hire">Hire</option>
+                    <option value="Strong Hire">Strong Hire</option>
+                  </select>
+                </div>
+
                 <div className="mb-3">
                   <label className="form-label">Strengths</label>
                   <textarea

@@ -57,10 +57,20 @@ function IntervieweeSessions() {
                   </td>
                   <td>
                     {session.feedback ? (
-                      <div>
-                        <strong>Rating: {session.feedback.rating}/5</strong>
-                        {session.feedback.strengths && <p className="mb-0 small text-success">✓ {session.feedback.strengths}</p>}
-                        {session.feedback.improvements && <p className="mb-0 small text-warning">↑ {session.feedback.improvements}</p>}
+                      <div style={{ fontSize: "0.85rem" }}>
+                        <div className="mb-1">
+                          <strong>Overall: {session.feedback.rating}/5</strong>
+                          <span className={`badge ms-2 bg-${session.feedback.recommendation?.includes('Hire') ? 'success' : 'secondary'}`}>
+                            {session.feedback.recommendation}
+                          </span>
+                        </div>
+                        <div className="d-flex gap-2 mb-1 text-muted">
+                          <span>Tech: {session.feedback.technicalScore}</span>
+                          <span>Comm: {session.feedback.communicationScore}</span>
+                          <span>Prob: {session.feedback.problemSolvingScore}</span>
+                        </div>
+                        {session.feedback.strengths && <div className="text-success">✓ {session.feedback.strengths}</div>}
+                        {session.feedback.improvements && <div className="text-warning">↑ {session.feedback.improvements}</div>}
                       </div>
                     ) : (
                       <span className="text-muted">Pending</span>

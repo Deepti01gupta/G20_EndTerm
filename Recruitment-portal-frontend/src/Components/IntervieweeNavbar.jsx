@@ -38,6 +38,7 @@ function IntervieweeNavbar() {
             <li className="nav-item"><Link className="nav-link" to="/interviewee/dashboard">Dashboard</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewee/find-interviewer">Find Interviewer</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewee/my-sessions">My Sessions</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/interviewee/jobs">Jobs</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/interviewee/profile">Profile</Link></li>
 
             {user && (

@@ -18,6 +18,7 @@ import IntervieweeDashboard from "./Pages/Interviewee/IntervieweeDashboard";
 import FindInterviewer from "./Pages/Interviewee/FindInterviewer";
 import IntervieweeSessions from "./Pages/Interviewee/IntervieweeSessions";
 import IntervieweeProfile from "./Pages/Interviewee/IntervieweeProfile";
+import Jobs from "./Pages/Interviewee/Jobs";
 
 // Interviewer Pages
 import InterviewerDashboard from "./Pages/Interviewer/InterviewerDashboard";
@@ -69,6 +70,7 @@ function App() {
           <Route path="/interviewee/dashboard" element={<IntervieweeDashboard />} />
           <Route path="/interviewee/find-interviewer" element={<FindInterviewer />} />
           <Route path="/interviewee/my-sessions" element={<IntervieweeSessions />} />
+          <Route path="/interviewee/jobs" element={<Jobs />} />
           <Route path="/interviewee/profile" element={<IntervieweeProfile />} />
         </Route>
 
