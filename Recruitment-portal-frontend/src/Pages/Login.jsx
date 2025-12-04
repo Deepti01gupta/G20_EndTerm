@@ -9,27 +9,18 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Get users from localStorage
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // Find matching user
     const user = users.find((u) => u.email === email && u.password === password);
 
     if (user) {
-      // Save logged in user
       localStorage.setItem("loggedInUser", JSON.stringify(user));
-
-      alert(`Welcome back, ${user.name}!`);
-
-      // Redirect based on role
-     if (user.role === "employer") {
-  navigate("/employer/dashboard");
-} else {
-  navigate("/jobseeker/dashboard");
-}
-
+      if (user.role === "interviewer") {
+        navigate("/interviewer/dashboard");
+      } else {
+        navigate("/interviewee/dashboard");
+      }
     } else {
-      alert("Invalid email or password. Please try again.");
+      alert("Invalid credentials");
     }
   };
 
@@ -37,7 +28,7 @@ function Login() {
     <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
       <div className="card shadow p-4" style={{ maxWidth: "400px", width: "100%" }}>
         {/* Logo / Title */}
-        <h2 className="text-center mb-4">Login to HireUp</h2>
+        <h2 className="text-center mb-4">InterviewPrep Login</h2>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
